@@ -19,13 +19,86 @@ export class MyCard extends LitElement {
   static get styles() {
     return css`
       :host {
-        display: block;
+        display: inline-flex;
       }
+      h1{
+  text-align:center;
+  color:purple;
+  background-color:pink;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 0%;
+}
+.my-card.change-color {
+  background-color: green;
+}
+.my-card{
+  background-color: orange;
+  padding: 8px;
+  margin: 50px;
+}
+.card-image {
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+a{
+  text-decoration: none;
+}
+.paragraph-text{
+  font-size: 20px;
+  
+}
+.my-button{
+  background-color: white;
+  color: purple;
+  font-size: 15px;
+  padding: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.my-button:focus,
+.my-button:hover{
+  background-color:pink;
+}
+@media screen and (max-width:500px){
+  .my-button{
+    display:none;
+  }
+}
+@media screen and (min-width:800px){
+  .my-button{
+    display:none;
+  }
+}
+@media screen and (max-width:500px){
+  .card-image{
+    width: 100px;
+  }
+}
+      
     `;
   }
 
+
   render() {
-    return html`<div>${this.title}</div>`;
+    return html`<div class="control-wrapper">
+    <button class="duplicate">Clone Card</button>
+    <button id="change-title">Change Title</button>
+    <button id="change-image">Change image</button>
+    <button id="change-background">Change background</button>
+    <button id="delete-card">Delete Card</button>
+  </div>
+  
+  <div id="card-list">
+    <div class="my-card">
+      <h1 id="card-title"> Ivy</h1>
+      <img class="card-image" alt="A picture of a pitbull mix dog, with short spine syndrome." src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_mleh6JmdZBATgzxJOP4FPF6BAeV67YpF7A&usqp=CAU"/>
+      <p class="paragraph-text">This is Ivy, a dog with short spine syndrome. I'm familar with her because... this is who I'm compared to. Almost daily. By my lovely roommate. Thanks Eryn.</p>
+    </div>
+  </div>`;
   }
 
   static get properties() {
