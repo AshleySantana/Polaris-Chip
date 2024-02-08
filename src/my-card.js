@@ -19,12 +19,20 @@ export class MyCard extends LitElement {
     this.cardTitle = "ivy";
     this.paragraphText = "...";
     this.changeBackground = "Change Background";
+    this.fancy = false;
   }
 
   static get styles() {
     return css`
+      // me or default styles
       :host {
         display: inline-flex;
+      } 
+      :host([fancy]) {
+        display: block;
+        background-color: pink;
+        border: 2px solid fuchsia;
+        box-shadow: 10px 5px 5px red;
       }
       h1{
         text-align:center;
@@ -86,6 +94,15 @@ export class MyCard extends LitElement {
     `;
         }
 
+  openChanged(e) {
+    console.log(e.newState);
+    if (e.newState === "open") {
+      this.fancy = true;
+    }
+    else {
+      this.fancy = false;
+    }
+  }
 
   render() {
     return html`
@@ -101,7 +118,12 @@ export class MyCard extends LitElement {
         <div class="my-card">
           <h1 id="card-title">${this.cardTitle}</h1>
           <img class="card-image" alt="${this.altText}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_mleh6JmdZBATgzxJOP4FPF6BAeV67YpF7A&usqp=CAU"/>
-          <p class="paragraph-text">${this.paragraphText}</p>
+           <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+            <summary>Description</summary>
+            <div> 
+              <slot>${this.description}</slot>
+            </div>
+          </details>
         </div>
       </div>`;
     }
@@ -113,7 +135,8 @@ export class MyCard extends LitElement {
       altText: {type: String},
       cardTitle: {type: String},
       paragraphText: {type: String},
-      changeBackground: {type: String}
+      changeBackground: {type: String},
+      fancy: { type: Boolean, reflect: true }, 
     };
   }
 }
