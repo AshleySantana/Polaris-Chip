@@ -35,15 +35,39 @@
   <polaris-chip title="Cool shit"></polaris-chip>
 
   <h1>my-card</h1>
-  <my-card  paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." cloneCard="Duplicate" altText="MacbookAir"></my-card>
-  <my-card paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." cloneCard="Random Button" cardTitle="frogqueenivy"></my-card>
-  <my-card paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." altText="adorable dog" cardTitle="My cool card"></my-card>
-  <my-card  changeBackground="A BUTTON">rsdhtjfgvhkb</my-card>
-  <my-card description="hello"></my-card>
+
+  <div class="control-wrapper">
+    <button class="duplicate">Duplicate</button>
+    <button id="change-title">Change Title</button>
+    <button id="change-image">Change image</button>
+    <button id="change-background">Change background</button>
+    <button id="delete-card">Delete Card</button>
+  </div>
+
+  <div class="card-wrapper">
+    <my-card paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." cloneCard="Duplicate" altText="MacbookAir"></my-card>
+    <my-card paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." cloneCard="Random Button" cardTitle="frogqueenivy"></my-card>
+    <my-card paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." altText="adorable dog" cardTitle="My cool card"></my-card>
+    <my-card  changeBackground="A BUTTON">rsdhtjfgvhkb</my-card>
+    <my-card description="hello"></my-card>
+  </div>
 
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
+  <script> 
+    const myCard=document.querySelector("my-card")
+    const shadowRoot=myCard.shadowRoot
+    document.querySelector(".duplicate").addEventListener("click", function(e){
+      const myCard = document.querySelector("my-card").cloneNode(true)
+      document.querySelector(".card-wrapper").appendChild(myCard)
+    })
+    document.querySelector("#change-title").addEventListener("click", function(e){
+      const title=shadowRoot.querySelector("#card-title")
+      title.textContent="hello hello hello"
+    })
+
+  </script>
 </body>
 
 </html>
