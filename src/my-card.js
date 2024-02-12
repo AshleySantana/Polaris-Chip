@@ -20,6 +20,7 @@ export class MyCard extends LitElement {
     this.paragraphText = "...";
     this.changeBackground = "Change Background";
     this.fancy = false;
+    this.image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_mleh6JmdZBATgzxJOP4FPF6BAeV67YpF7A&usqp=CAU";
   }
 
   static get styles() {
@@ -76,6 +77,11 @@ export class MyCard extends LitElement {
       .my-button:hover{
         background-color:pink;
       }
+
+      .change-bg{
+        background-color: green;
+      }
+
       @media screen and (max-width:500px){
         .my-button{
           display:none;
@@ -109,7 +115,7 @@ export class MyCard extends LitElement {
       <div id="card-list">
         <div class="my-card">
           <h1 id="card-title">${this.cardTitle}</h1>
-          <img class="card-image" alt="${this.altText}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_mleh6JmdZBATgzxJOP4FPF6BAeV67YpF7A&usqp=CAU"/>
+          <img class="card-image" alt="${this.altText}" src="${this.image}"/>
           <details ?open="${this.fancy}" @toggle="${this.openChanged}">
             <summary>Description</summary>
             <div> 
@@ -130,6 +136,8 @@ export class MyCard extends LitElement {
       paragraphText: {type: String},
       changeBackground: {type: String},
       fancy: { type: Boolean, reflect: true }, 
+      image: { type: String},
+      
     };
   }
 }
