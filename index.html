@@ -73,8 +73,14 @@
     document.querySelector("#change-image").addEventListener("click", function(e){
       const shadowRoot=myCard.shadowRoot
       myCard.forEach((card)=>{
-        myCard.image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_mleh6JmdZBATgzxJOP4FPF6BAeV67YpF7A&usqp=CAU"      })
-      })
+        card.image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_mleh6JmdZBATgzxJOP4FPF6BAeV67YpF7A&usqp=CAU"})
+    })
+    document.querySelector('#delete-card').addEventListener('click',function(e){
+      console.log(document.querySelectorAll('my-card'));
+      if(document.querySelectorAll('my-card').length !== 1) {
+      document.querySelector('my-card').remove();
+    }
+  });
 
   </script>
 </body>
