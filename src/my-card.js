@@ -127,7 +127,6 @@ export class MyCard extends LitElement {
           </details>
         </div>
       </div>`;
-
     }
 
   static get properties() {
