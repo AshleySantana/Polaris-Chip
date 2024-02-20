@@ -9,6 +9,8 @@ export class CounterApp extends LitElement {
   constructor() {
     super();
       this.number = 0;
+      this.min = -10;
+      this.max = 50;
      }
 
   static get styles() {
@@ -23,7 +25,7 @@ export class CounterApp extends LitElement {
       width: 50px;
     }
     .number{
-      font-size: 20px;
+      font-size: 40px;
     }
       
     `;
@@ -35,14 +37,25 @@ export class CounterApp extends LitElement {
   decrease(){
     this.number-=1;
   }
+  if(number = 18){
+    
+  }
 
   render() {
+    var color = "blue";
+    if(this.number === 18){
+
+    }
+
+
+
+
     return html`
       <div class="counter-wrapper">
         <div class="number">${this.number}</div>
         <div class="button-wrapper">
-          <button id="plus" @click="${this.increase}">+</button>
-          <button id="minus" @click="${this.decrease}">-</button>
+          <button id="plus" @click="${this.increase}" ?disabled="${this.max === this.number}">+</button>
+          <button id="minus" @click="${this.decrease}" ?disabled="${this.min === this.number}">-</button>
         </div>
       </div>
       `;
@@ -50,7 +63,9 @@ export class CounterApp extends LitElement {
 
   static get properties() {
     return {
-      number: { type: Number, reflect: true },
+      number: {type: Number, reflect: true },
+      min: {type: Number},
+      max: {type: Number}
     };
   }
 }
