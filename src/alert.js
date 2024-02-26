@@ -21,6 +21,14 @@ export class Alert extends LitElement {
   render() {
     return html`
 
+      <div class="alert-wrapper"></div>
+      
+        <div class="alerts-content-wrap>
+          <p>date</p>
+          <p>alert message</p>
+        </div>
+      
+
       `;
     }
 
