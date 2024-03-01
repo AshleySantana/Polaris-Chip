@@ -11,21 +11,33 @@ export class Alert extends LitElement {
       this.header = "Alert";
       this.date = "1/1/2001";
       this.body = "Alert body";
-
+      
      }
+
+    
+
 
   static get styles() {
     return css`
+        :hide([opened]) .minimized-alert{
+          display: none;
+        }
 
+        :show([opened=false]) .maximized-alert{
+          display: none;
+        }
     `;
     }
 
+toggleAlert(){
+  this.opened = !this.opened
+}
 
   render() {
     return html`
-      <div class="alert-wrapper"> 
+      <div class="${this.open ? "hide" : "show"}"> 
         <div class="minimized-alert"> 
-          <button class="expand-alert">expland alert</button>
+          <button class="expand-alert" @click="${this.toggleAlert}">expand alert</button>
           <p class="alert-header">${this.header}</p>
         </div>
         <div class="maximized-alert">
@@ -34,7 +46,7 @@ export class Alert extends LitElement {
           <div class="alert-message">
             <slot></slot>
           </div>
-          <button class="minimize-alert">minimize alert</button>
+          <button class="minimize-alert" @click="${this.toggleAlert}">minimize alert</button>
         </div>
       </div>
       `;
@@ -44,8 +56,7 @@ export class Alert extends LitElement {
     return {
       header: {type: String},
       date: {type: String},
-      
-
+      opened: {type: Boolean, reflect: true}
 
     };
   }
