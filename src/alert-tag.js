@@ -19,30 +19,29 @@ export class Alert extends LitElement {
 
   static get styles() {
     return css`
-        :hide([opened]) .minimized-alert{
+        .hide{
           display: none;
         }
-
-        :show([opened=false]) .maximized-alert{
-          display: none;
+        .show{
+          background-color:blue;
         }
     `;
     }
 
 toggleAlert(){
-  this.opened = !this.opened
+  this.opened = !this.opened;
 }
 
   render() {
     return html`
-      <div class="${this.open ? "hide" : "show"}"> 
-        <div class="minimized-alert"> 
+      <div class="alert-wrapper"> 
+        <div class="${this.opened ? "hide" : "show"}"> 
+          <p class="alert-header">${this.header}</p>
           <button class="expand-alert" @click="${this.toggleAlert}">expand alert</button>
-          <p class="alert-header">${this.header}</p>
         </div>
-        <div class="maximized-alert">
-          <p class="date">${this.date}</p>
+        <div class="${this.opened ? "hide" : "show"}">
           <p class="alert-header">${this.header}</p>
+          <p class="date">${this.date}</p>
           <div class="alert-message">
             <slot></slot>
           </div>
