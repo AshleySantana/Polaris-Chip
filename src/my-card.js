@@ -5,6 +5,19 @@ import "@lrnwebcomponents/meme-maker/meme-maker.js";
  * Now it's your turn. Here's what we need to try and do
  * 1. 
  */
+if (issueLevel === "notice") {
+  document.getElementById("alert").style.backgroundColor = "lightblue";
+}
+
+let color = "white";
+    if(this.issueLevel === "notice") color = "#0096FF";
+    if(this.issueLevel === "warning") color = "orange";
+    if(this.issueLevel === "alert") color = "red";
+
+    if(this.issueLevel === "notice") (this.alert-message) = "Small notice: watch out for this today.";
+    if(this.issueLevel === "warning") (this.alert-message) = "This is a warning. Exceed some caution."
+    if(this.issueLevel === "alert") (this.alert-message) = "This is an alert. PROCEED WITH IMMENSE CAUTION!";
+    
 
 export class MyCard extends LitElement {
 

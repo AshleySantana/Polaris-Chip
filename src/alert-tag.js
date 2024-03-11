@@ -8,62 +8,85 @@ export class Alert extends LitElement {
 
   constructor() {
     super();
-      this.header = "Alert";
-      this.date = "1/1/2001";
+      this.date = "Jan 1, 2001 12:00AM";
       this.body = "Alert body";
       this.opened = false;
       this.sticky = false;
+      this.issueLevel = "";
      }
-
 
   static get styles() {
     return css`
-        ::backdrop{
-          scroll-snap-type:none;
-        }
         .hide{
           display: none;
         }
-        .alert-wrapper{
-          display: flex;
-          background-color: blue;
-          position: sticky;
+        .alert{
+          background-color: #ffd100;
           margin-top: 0px;
+          margin-bottom: 10px;
+          padding:0px;
         }
-        .alert-wrapper.sticky{
+        .alert.sticky{
           position: sticky;
         }
+        .alert-header{
+          display: flex;
+          justify-content:space-around;
+          background-color: #bf8226;
+        }
+        .alert-date{
+          letter-spacing: 0.03rem;
+          font-size: 1.2rem;
+          font-family:sans-serif;
+          font-weight:bold;
+        }
+        .alert-button{
+          background-color:transparent;
+          color:white;
+          border:none;
+          cursor:pointer;
+          margin:5px;
+        }
+        .alert-body{
+          padding:0% 5% 5% 5%;
+        }
+        .alert-message{
+          text-align:center;
+          color:#000321;
+          font-size:1.12rem;
+          font-family:sans-serif;
+        }
+        
+
+
     `;
     }
 
-toggleAlert(){
-  this.opened = !this.opened;
-}
+  toggleAlert(){
+    this.opened = !this.opened;
+  }
+
 
   render() {
     return html`
-      <div class="alert-wrapper">
-        <div class="alert ${(this.sticky) ? "sticky" : ""}">
-        <p class="alert-header">${this.header}</p>
-        <div class="alert-body ${this.opened ? "hide" : "show"}">
-            <p class="date">${this.date}</p>
-            <div class="alert-message">
-              <slot></slot>
-            </div>
+        <div class="alert ${(this.sticky) ? "sticky" : ""} ${this.issueLevel}">
+          <div class="alert-header">
+            <p class="alert-date">${this.date}</p>
+            <button class="alert-button" @click="${this.toggleAlert}">dfv</button>
+          </div>
+          <div class="alert-body ${this.opened ? "hide" : "show"}">
+            <slot class="alert-message"></slot>
+          </div>
         </div>
-        <button class="expand-alert" @click="${this.toggleAlert}">expand alert</button>
-        </div>
-      </div>
       `;
     }
 
   static get properties() {
     return {
-      header: {type: String},
       date: {type: String},
       opened: {type: Boolean, reflect: true},
       sticky: {type: Boolean},
-      
+      issueLevel: {type: String},
     };
   }
 }
