@@ -11,19 +11,27 @@ export class Alert extends LitElement {
       this.header = "Alert";
       this.date = "1/1/2001";
       this.body = "Alert body";
-      
+      this.opened = false;
+      this.sticky = false;
      }
-
-    
 
 
   static get styles() {
     return css`
+        ::backdrop{
+          scroll-snap-type:none;
+        }
         .hide{
           display: none;
         }
-        .show{
-          background-color:blue;
+        .alert-wrapper{
+          display: flex;
+          background-color: blue;
+          position: sticky;
+          margin-top: 0px;
+        }
+        .alert-wrapper.sticky{
+          position: sticky;
         }
     `;
     }
@@ -34,18 +42,16 @@ toggleAlert(){
 
   render() {
     return html`
-      <div class="alert-wrapper"> 
-        <div class="${this.opened ? "hide" : "show"}"> 
-          <p class="alert-header">${this.header}</p>
-          <button class="expand-alert" @click="${this.toggleAlert}">expand alert</button>
+      <div class="alert-wrapper">
+        <div class="alert ${(this.sticky) ? "sticky" : ""}">
+        <p class="alert-header">${this.header}</p>
+        <div class="alert-body ${this.opened ? "hide" : "show"}">
+            <p class="date">${this.date}</p>
+            <div class="alert-message">
+              <slot></slot>
+            </div>
         </div>
-        <div class="${this.opened ? "hide" : "show"}">
-          <p class="alert-header">${this.header}</p>
-          <p class="date">${this.date}</p>
-          <div class="alert-message">
-            <slot></slot>
-          </div>
-          <button class="minimize-alert" @click="${this.toggleAlert}">minimize alert</button>
+        <button class="expand-alert" @click="${this.toggleAlert}">expand alert</button>
         </div>
       </div>
       `;
@@ -55,8 +61,9 @@ toggleAlert(){
     return {
       header: {type: String},
       date: {type: String},
-      opened: {type: Boolean, reflect: true}
-
+      opened: {type: Boolean, reflect: true},
+      sticky: {type: Boolean},
+      
     };
   }
 }
