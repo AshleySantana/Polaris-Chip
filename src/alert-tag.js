@@ -48,7 +48,7 @@ export class Alert extends LitElement {
           margin:5px;
         }
         .alert-body{
-          padding:0% 5% 5% 5%;
+          padding:2% 5% 2% 5%;
         }
         .alert-message{
           text-align:center;
@@ -57,8 +57,6 @@ export class Alert extends LitElement {
           font-family:sans-serif;
         }
         
-
-
     `;
     }
 
@@ -66,10 +64,10 @@ export class Alert extends LitElement {
     this.opened = !this.opened;
   }
 
-
   render() {
     return html`
-        <div class="alert ${(this.sticky) ? "sticky" : ""} ${this.issueLevel}">
+      <div class="${this.issueLevel}">
+        <div class="alert ${(this.sticky) ? "sticky" : ""}">
           <div class="alert-header">
             <p class="alert-date">${this.date}</p>
             <button class="alert-button" @click="${this.toggleAlert}">dfv</button>
@@ -78,14 +76,16 @@ export class Alert extends LitElement {
             <slot class="alert-message"></slot>
           </div>
         </div>
+        </div>
       `;
+      
     }
 
   static get properties() {
     return {
       date: {type: String},
       opened: {type: Boolean, reflect: true},
-      sticky: {type: Boolean},
+      sticky: {type: Boolean, reflect: true},
       issueLevel: {type: String},
     };
   }
