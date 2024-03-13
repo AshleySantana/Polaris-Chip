@@ -11,12 +11,17 @@ export class Alert extends LitElement {
       this.date = "Jan 1, 2001 12:00AM";
       this.body = "Alert body";
       this.opened = false;
-      this.sticky = false;
-      this.issueLevel = "";
+      this.isSticky = false;
+      this.issueLevel = "notice";
      }
 
   static get styles() {
     return css`
+        :host([isSticky]){
+          position: sticky;
+          top: 0;
+          z-index: 100;
+        }
         .hide{
           display: none;
         }
@@ -26,8 +31,10 @@ export class Alert extends LitElement {
           margin-bottom: 10px;
           padding:0px;
         }
-        .alert.sticky{
+        .sticky{
           position: sticky;
+          top: 0;
+          z-index: 100;
         }
         .alert-header{
           display: flex;
@@ -39,6 +46,7 @@ export class Alert extends LitElement {
           font-size: 1.2rem;
           font-family:sans-serif;
           font-weight:bold;
+        
         }
         .alert-button{
           background-color:transparent;
@@ -56,6 +64,16 @@ export class Alert extends LitElement {
           font-size:1.12rem;
           font-family:sans-serif;
         }
+        .notice{
+          background-color: blue;
+        }
+        .notice slot{
+          color: white;
+        }
+        .emergency{
+          background-color: red;
+        }
+        
         
     `;
     }
@@ -66,16 +84,14 @@ export class Alert extends LitElement {
 
   render() {
     return html`
-      <div class="${this.issueLevel}">
-        <div class="alert ${(this.sticky) ? "sticky" : ""}">
+        <div class="alert ${this.issueLevel == "notice" ? "notice": ""} ${this.issueLevel == "emergency" ? "emergency": ""}">
           <div class="alert-header">
             <p class="alert-date">${this.date}</p>
-            <button class="alert-button" @click="${this.toggleAlert}">dfv</button>
+            <button class="alert-button" @click="${this.toggleAlert}">${this.opened ? "open" : "close"}</button>
           </div>
           <div class="alert-body ${this.opened ? "hide" : "show"}">
             <slot class="alert-message"></slot>
           </div>
-        </div>
         </div>
       `;
       
@@ -85,7 +101,7 @@ export class Alert extends LitElement {
     return {
       date: {type: String},
       opened: {type: Boolean, reflect: true},
-      sticky: {type: Boolean, reflect: true},
+      isSticky: {type: Boolean, reflect: true},
       issueLevel: {type: String},
     };
   }
