@@ -15,7 +15,6 @@ export class CounterApp extends LitElement {
 
   static get styles() {
     return css`
-
     :host([number="16"]).button-wrapper{
       color: green;
     }
@@ -43,7 +42,6 @@ export class CounterApp extends LitElement {
 
   updated(changedProperties) {
     console.log(changedProperties);
-
     if (changedProperties.has("number") && (this.number === 21)) {
       this.makeItRain();
       // do your testing of the value and make it rain by calling makeItRain

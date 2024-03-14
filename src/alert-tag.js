@@ -78,8 +78,19 @@ export class Alert extends LitElement {
     `;
     }
 
+  firstUpdated(){
+    if (localStorage.getItem("alertOpen") == "false"){
+      this.opened = false;
+      console.log(localStorage.getItem("alertOpen"));
+    }else{
+      this.opened = true;
+      console.log(localStorage.getItem("alertOpen"));
+    };
+  }
+
   toggleAlert(){
     this.opened = !this.opened;
+    localStorage.setItem("alertOpen", this.opened);
   }
 
   render() {
