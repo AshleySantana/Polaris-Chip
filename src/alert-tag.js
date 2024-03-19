@@ -12,7 +12,7 @@ export class Alert extends LitElement {
       this.body = "Alert body";
       this.opened = false;
       this.isSticky = false;
-      this.issueLevel = "notice";
+      this.issueLevel = "warning";
      }
 
   static get styles() {
@@ -46,7 +46,6 @@ export class Alert extends LitElement {
           font-size: 1.2rem;
           font-family:sans-serif;
           font-weight:bold;
-        
         }
         .alert-button{
           background-color:transparent;
@@ -65,15 +64,20 @@ export class Alert extends LitElement {
           font-family:sans-serif;
         }
         .notice{
-          background-color: blue;
+          background-color: lightblue;
+        }
+        .alert.alert-header{
+          background-color:green;
         }
         .notice slot{
-          color: white;
+          color: #000321;
         }
         .emergency{
           background-color: red;
         }
-        
+        .emergency slot{
+          color: white;
+        }
         
     `;
     }
@@ -105,7 +109,6 @@ export class Alert extends LitElement {
           </div>
         </div>
       `;
-      
     }
 
   static get properties() {
