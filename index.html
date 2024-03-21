@@ -14,7 +14,7 @@
       margin: 0;
       padding: 0;
       font-family: sans-serif;
-      background-color: #ededed;
+      background-color: white;
     }
     polaris-chip {
       margin: 16px;
@@ -24,18 +24,28 @@
 
 <body>
 
-  <alert-tag issueLevel="notice" date="Mar 1, 2024 10:00AM" isSticky>Here is my alert message.</alert-tag>
+  <haxcms-party-ui></haxcms-party-ui>
+
+  <!-- <div class="confirmation-message">
+    <button class="exit-message">x</button>
+    <div class="message-wrapper">
+      <p>You have added this person to the group.</p>
+      <button>Yes</button>
+      <button>No</button>
+    </div>
+  </div> -->
+
+  
+  <!-- 
   <alert-tag issueLevel>Occaecat laboris incididunt ea labore quis in qui commodo velit cillum et commodo. Dolore consectetur eu eu reprehenderit anim fugiat in nostrud anim magna enim nisi. Mollit est incididunt sint aliqua duis. Deserunt ut velit deserunt fugiat eiusmod. Do incididunt laborum aliqua cupidatat adipisicing fugiat reprehenderit cillum id. Minim minim elit occaecat id velit fugiat ea. Aliqua excepteur ea excepteur cillum esse voluptate non elit laboris laboris esse est sunt incididunt ullamco.</alert-tag>
   <alert-tag issueLevel="emergency">Here is my alert message.</alert-tag>
 
   <h1>polaris-chip</h1>
-  <!-- this is going to do whatever the tag's defaults are -->
   <polaris-chip title="News of Record"></polaris-chip>
   <polaris-chip title="Faculty and staff"></polaris-chip>
   <polaris-chip title="Football"></polaris-chip>
   <polaris-chip title="money"></polaris-chip>
   <polaris-chip></polaris-chip>
-  <!-- this is going to take the tag and change the title -->
   <polaris-chip title="Cool shit"></polaris-chip>
 
   <h1>my-card</h1>
@@ -48,23 +58,26 @@
     <button id="delete-card">Delete Card</button>
   </div>
 
-  <!-- <div class="card-wrapper">
+  <div class="card-wrapper">
     <my-card image="https://github.com/elmsln.png" paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." cloneCard="Duplicate" altText="MacbookAir"></my-card>
     <my-card paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." cloneCard="Random Button" cardTitle="frogqueenivy"></my-card>
     <my-card paragraphText="Ivy the dog otherwise known as frogqueenivy is a dog with short spine syndrome." altText="adorable dog" cardTitle="My cool card"></my-card>
     <my-card  changeBackground="A BUTTON">rsdhtjfgvhkb</my-card>
     <my-card description="hello"></my-card>
-  </div> -->
 
-<h1>counter-app</h1>
-<counter-app></counter-app>
-<counter-app number="16" min="14" max="40"></counter-app>
+
+    <h1>counter-app</h1>
+    <counter-app></counter-app>
+    <counter-app number="16" min="14" max="40"></counter-app>
+  </div> -->
 
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
   <script type="module" src="./src/counter-app.js"></script>
   <script type="module" src="./src/alert-tag.js"></script>
+  <script type="module" src="./src/haxcms-party-ui.js"></script>
+
   <script> 
     const myCard=document.querySelectorAll("my-card")
     document.querySelector(".duplicate").addEventListener("click", function(e){
