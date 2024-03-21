@@ -39,7 +39,7 @@ export class HaxcmsPartyUi extends LitElement {
     return {
       delete: {type: Boolean, reflect: true},
       submit: {type: Boolean, reflect: true},
-      
+
     };
   }
 }
