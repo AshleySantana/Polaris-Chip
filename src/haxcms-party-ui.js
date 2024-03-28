@@ -11,7 +11,7 @@ export class HaxcmsPartyUi extends LitElement {
   constructor() {
     super();
       this.delete = false;
-      this.character = [""];
+      this.userArray = [];
 
     }
 
@@ -20,29 +20,37 @@ export class HaxcmsPartyUi extends LitElement {
       .delete{
         display: none;
       }
-      .user-name{
-        text-align:center;
-      }
+      
       
     `;
     }
 
+  addUser(){
+    const user = this.shadowRoot.querySelector("#input-user").value;
+    this.userArray.push(user);
+    this.requestUpdate();
+    console.log(this.userArray);
+  }  
+  deleteUser(e){
+    
+    var id = e.target.id;
+    
+  }
+
   render() {
     return html`
       <div class="user">
-        <div class="character-list">
-            ${this.character.map(item => html`
-                <rpg-character seed="${item}"></rpg-character>
+        <div class="user-list">
+            ${this.userArray.map((name) => html`
+                <rpg-character seed="${name}" ></rpg-character>
+                <button id="${name}" @click = ${this.deleteUser}>delete</button>
             `)}
         </div>
         <div class="add-user">
-                <div class="user-display"></div>
-                  <p class="user-name">Name</p>
-                </div>
             <input type="text" id="input-user">
-            <button>+</button>
+            <button @click = ${this.addUser}>+</button>
         </div class="user-actions">
-            <button class="button">delete</button>
+            <!-- <button class="button">delete</button> -->
             <button class="button">submit</button>
         </div>
         <confirmation-message class="confirmation-message ${this.delete == true ? "delete": ""}"></confirmation-message>
@@ -53,7 +61,7 @@ export class HaxcmsPartyUi extends LitElement {
   static get properties() {
     return {
       delete: {type: Boolean, reflect: true},
-      character: {type: Array},
+      userArray: {type: Array},
     };
   }
 }
