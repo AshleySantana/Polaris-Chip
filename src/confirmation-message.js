@@ -13,11 +13,10 @@ export class ConfirmationMessage extends LitElement {
 
   static get styles() {
     return css`
-    .confirmation-message {
-        display: flex;
-        background-color: #8abfd9;
-        width: 300px;
-      }
+    .message-wrapper{
+      display: flex;
+      background-color: 
+    }
     `;
     }
 
