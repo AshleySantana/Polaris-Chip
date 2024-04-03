@@ -12,7 +12,7 @@ export class HaxcmsPartyUi extends LitElement {
     super();
       this.delete = false;
       this.userArray = [];
-
+      this.selectedUser = "";
     }
 
   static get styles() {
@@ -32,9 +32,23 @@ export class HaxcmsPartyUi extends LitElement {
     console.log(this.userArray);
   }  
   deleteUser(e){
-    
-    var id = e.target.id;
-    
+    const id = e.target.id;
+    this.selectedUser = id;
+    this.delete = true;
+  }
+  confirmation(e){
+    const position = this.userArray.indexOf(this.selectedUser);
+    if(e.type === "confirmationYes"){
+      this.userArray.splice(position, 1);
+      this.userToDelete = '';
+      this.deleteUserPending = false;
+      this.requestUpdate();
+    }else{
+      this.userToDelete = '';
+      this.deleteUserPending = false;
+      this.requestUpdate();
+    }
+
   }
 
   render() {
@@ -44,7 +58,13 @@ export class HaxcmsPartyUi extends LitElement {
             ${this.userArray.map((name) => html`
                 <rpg-character seed="${name}" ></rpg-character>
                 <button id="${name}" @click = ${this.deleteUser}>delete</button>
-            `)}
+                ${this.delete && name === this.selectedUser ?
+                    html`
+                    <confirmation-message class="confirmation-message" 
+                      @confirmationYes="${this.confirmation}" 
+                      @confirmationNo="${this.confirmation}"></confirmation-message>`
+                    : ''}
+                 `)}
         </div>
         <div class="add-user">
             <input type="text" id="input-user">
@@ -62,6 +82,7 @@ export class HaxcmsPartyUi extends LitElement {
     return {
       delete: {type: Boolean, reflect: true},
       userArray: {type: Array},
+      selectedUser: {type: String},
     };
   }
 }

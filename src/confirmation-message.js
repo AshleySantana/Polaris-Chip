@@ -13,19 +13,30 @@ export class ConfirmationMessage extends LitElement {
 
   static get styles() {
     return css`
-
-    
+    .confirmation-message {
+        display: flex;
+        background-color: #8abfd9;
+        width: 300px;
+      }
     `;
+    }
+
+    yes() { 
+      this.dispatchEvent(new CustomEvent('confirmationYes'));
+    }
+  
+    no() {
+      this.dispatchEvent(new CustomEvent('confirmationNo'));
     }
 
   render() {
     return html`
         <div class="confirmation-message">
-                <button class="exit-message">x</button>
+                <button class="exit-message" @click="${this.no}">x</button>
             <div class="message-wrapper">
-                <p>You have added this person to the group.</p>
-                <button>Yes</button>
-                <button>No</button>
+                <p>Are you sure you want to delete?</p>
+                <button @click="${this.yes}">Yes</button>
+                <button @click="${this.no}">No</button>
             </div>
         </div>
       `;
