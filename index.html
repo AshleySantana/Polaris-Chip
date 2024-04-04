@@ -51,16 +51,7 @@
 
 <body>
 
-  <haxcms-party-ui delete></haxcms-party-ui>
-
-  <div class="confirmation-message">
-    <button class="exit-message" @click="${this.no}">x</button>
-    <div class="message-wrapper">
-        <p>Are you sure you want to delete?</p>
-        <button @click="${this.yes}">Yes</button>
-        <button @click="${this.no}">No</button>
-    </div>
-  </div>
+  <haxcms-party-ui></haxcms-party-ui>
   
   <!-- 
   <alert-tag issueLevel>Occaecat laboris incididunt ea labore quis in qui commodo velit cillum et commodo. Dolore consectetur eu eu reprehenderit anim fugiat in nostrud anim magna enim nisi. Mollit est incididunt sint aliqua duis. Deserunt ut velit deserunt fugiat eiusmod. Do incididunt laborum aliqua cupidatat adipisicing fugiat reprehenderit cillum id. Minim minim elit occaecat id velit fugiat ea. Aliqua excepteur ea excepteur cillum esse voluptate non elit laboris laboris esse est sunt incididunt ullamco.</alert-tag>
@@ -104,7 +95,7 @@
   <script type="module" src="./src/alert-tag.js"></script>
   <script type="module" src="./src/haxcms-party-ui.js"></script>
 
-  <script> 
+  <!-- <script> 
     const myCard=document.querySelectorAll("my-card")
     document.querySelector(".duplicate").addEventListener("click", function(e){
       const myCard = document.querySelector("my-card").cloneNode(true)
@@ -130,6 +121,6 @@
       document.querySelector('my-card').remove();
     }
   });
-  </script>
+  </script> -->
 </body>
 </html>

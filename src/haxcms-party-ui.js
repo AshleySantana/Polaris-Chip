@@ -10,6 +10,7 @@ export class HaxcmsPartyUi extends LitElement {
 
   constructor() {
     super();
+      this.submitPartyButton = false;
       this.delete = false;
       this.userArray = [];
       this.selectedUser = "";
@@ -18,9 +19,6 @@ export class HaxcmsPartyUi extends LitElement {
 
   static get styles() {
     return css`
-      .delete{
-        display: none;
-      }
       .page-header{
         color: black;
         text-align: center;
@@ -81,7 +79,6 @@ export class HaxcmsPartyUi extends LitElement {
     this.selectedUser = id;
     this.delete = true;
   }
-
   confirmation(e){
     const position = this.userArray.indexOf(this.selectedUser);
     if(e.type === "confirmationYes"){
@@ -94,6 +91,12 @@ export class HaxcmsPartyUi extends LitElement {
       this.selectedUser = false;
       this.requestUpdate();
     }
+    this.delete = false;
+  }
+  submitParty(e){
+    this.submitPartyButton = true;
+    this.makeItRain();
+    console.log(this.userArray);
   }
 
 makeItRain() {
@@ -115,24 +118,21 @@ makeItRain() {
           <div class="user">
               ${this.userArray.map((name) => html`
                   <rpg-character seed="${name}" ></rpg-character>
-                  <button class="delete-button" id="${name}" @click = ${this.deleteUser}>delete</button>
-                  ${this.delete && name === this.selectedUser ?
-                      html`
-                      <confirmation-message class="confirmation-message" 
-                        @confirmationYes="${this.confirmation}" 
-                        @confirmationNo="${this.confirmation}"></confirmation-message>`
-                      : ''}
-                  `)}
+                  <button class="delete-button" id="${name}" @click=${this.deleteUser}>delete</button> `)}
         </div>
       </div>
       <div class="user-actions">
             <input type="text" id="input-user" placeholder="Search party member...">
-            <button class="add-button" @click="${this.addUser}" ?disabled="${this.inputEmpty == true}">add</button>
+            <button class="add-button" @click="${this.addUser}">add</button>
       </div>
-      <button class="submit-button">submit</button>
-      <confirmation-message class="confirmation-message ${this.delete == true ? "delete": ""}"></confirmation-message>
+      <button class="submit-button" @click = "${this.submitParty}">submit</button>
       </confetti-container>
-    `;
+
+      ${this.delete ? html`
+        <confirmation-message class="confirmation-message" @confirmationYes="${this.confirmation}" 
+            @confirmationNo="${this.confirmation}"></confirmation-message> ` : ''}
+
+      `;
     }
 
   static get properties() {
@@ -140,7 +140,9 @@ makeItRain() {
       delete: {type: Boolean, reflect: true},
       userArray: {type: Array},
       selectedUser: {type: String, reflect: true},
-      inputEmtpy: {type: Boolean}, 
+      inputEmtpy: {type: Boolean},
+      submitPartyButton: {type: Boolean}, 
+
     };
   }
 }
