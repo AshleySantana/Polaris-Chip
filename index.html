@@ -40,7 +40,12 @@
     background-repeat: repeat; 
     }
     */
-
+    .message-wrapper{
+      display: flex;
+      background-color: white;
+      position: relative;
+      
+    }
   </style>
 </head>
 
@@ -48,6 +53,14 @@
 
   <haxcms-party-ui delete></haxcms-party-ui>
 
+  <div class="confirmation-message">
+    <button class="exit-message" @click="${this.no}">x</button>
+    <div class="message-wrapper">
+        <p>Are you sure you want to delete?</p>
+        <button @click="${this.yes}">Yes</button>
+        <button @click="${this.no}">No</button>
+    </div>
+  </div>
   
   <!-- 
   <alert-tag issueLevel>Occaecat laboris incididunt ea labore quis in qui commodo velit cillum et commodo. Dolore consectetur eu eu reprehenderit anim fugiat in nostrud anim magna enim nisi. Mollit est incididunt sint aliqua duis. Deserunt ut velit deserunt fugiat eiusmod. Do incididunt laborum aliqua cupidatat adipisicing fugiat reprehenderit cillum id. Minim minim elit occaecat id velit fugiat ea. Aliqua excepteur ea excepteur cillum esse voluptate non elit laboris laboris esse est sunt incididunt ullamco.</alert-tag>

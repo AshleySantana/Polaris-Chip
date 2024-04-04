@@ -15,10 +15,9 @@ export class ConfirmationMessage extends LitElement {
     return css`
     .message-wrapper{
       display: flex;
-      background-color: 
     }
     `;
-    }
+  }
 
     yes() { 
       this.dispatchEvent(new CustomEvent('confirmationYes'));
