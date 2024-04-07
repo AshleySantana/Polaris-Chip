@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { ConfirmationMessage } from './confirmation-message';
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
-//import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
+import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 
-export class HaxcmsPartyUi extends LitElement {
+export class HaxcmsPartyUi extends DDD {
   static get tag() {
     return 'haxcms-party-ui';
   }
@@ -61,15 +61,23 @@ export class HaxcmsPartyUi extends LitElement {
       #input-user:hover{
         border-color: blue;
       }
+      #input-user:focus{
+        border: blue;
+      }
       
     `;
     }
 
   addUser(){
     const user = this.shadowRoot.querySelector("#input-user").value;
-    if(user == null){
-      this.inputEmtpy = true;
+    if(user === ""){
+      alert("bad")
     }
+    if(this.userArray.includes(user)){
+      alert("NO")
+      return
+    }
+
     this.userArray.push(user);
     this.requestUpdate();
     console.log(this.userArray);
