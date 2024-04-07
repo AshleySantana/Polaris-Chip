@@ -33,14 +33,14 @@ export class ConfirmationMessage extends LitElement {
 
   render() {
     return html`
-        <dialog class="confirmation-message" open>
-                <button class="exit-message" @click="${this.no}">x</button>
-            <div class="message-wrapper">
-                <p>Are you sure you want to delete?</p>
-                <button @click="${this.yes}">Yes</button>
-                <button @click="${this.no}">No</button>
-            </div>
-        </dialog>
+      <dialog class="confirmation-message" open>
+        <button class="exit-message" @click="${this.no}">x</button>
+        <div class="message-wrapper">
+          <p>Are you sure you want to delete?</p>
+          <button @click="${this.yes}">Yes</button>
+          <button @click="${this.no}">No</button>
+        </div>
+      </dialog>
       `;
     }
 

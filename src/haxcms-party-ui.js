@@ -67,21 +67,26 @@ export class HaxcmsPartyUi extends DDD {
       
     `;
     }
-
+  
   addUser(){
+    this.userArray.push(user);
+    this.requestUpdate();
+    console.log(this.userArray);
+  } 
+  validationChecks(){
     const user = this.shadowRoot.querySelector("#input-user").value;
     if(user === ""){
       alert("bad")
     }
     if(this.userArray.includes(user)){
-      alert("NO")
+      alert("NO! Maybe you forgot, you already added" this.user)
       return
     }
+    if(user.length() > 100){
+      alert("This username is too long.")
+    }
 
-    this.userArray.push(user);
-    this.requestUpdate();
-    console.log(this.userArray);
-  }  
+  } 
   deleteUser(e){
     const id = e.target.id;
     this.selectedUser = id;
@@ -120,24 +125,23 @@ makeItRain() {
   render() {
     return html`
     <confetti-container id="confetti">
-    <h1 class="page-header"> CREATE YOUR PARTY </h1>
-    <h3>Type in a username and add them to your party!</h3>
+      <h1 class="page-header"> CREATE YOUR PARTY </h1>
+      <h3>Type in a username and add them to your party!</h3>
         <div class="user-list">
           <div class="user">
-              ${this.userArray.map((name) => html`
-                  <rpg-character seed="${name}" ></rpg-character>
-                  <button class="delete-button" id="${name}" @click=${this.deleteUser}>delete</button> `)}
+            ${this.userArray.map((name) => html`
+              <rpg-character seed="${name}" ></rpg-character>
+              <button class="delete-button" id="${name}" @click=${this.deleteUser}>delete</button> `)}
+          </div>
         </div>
-      </div>
-      <div class="user-actions">
-            <input type="text" id="input-user" placeholder="Search party member...">
-            <button class="add-button" @click="${this.addUser}">add</button>
-      </div>
+        <div class="user-actions">
+              <input type="text" id="input-user" placeholder="Search party member...">
+              <button class="add-button" @click="${this.addUser}">add</button>
+        </div>
       <button class="submit-button" @click = "${this.submitParty}">submit</button>
-      </confetti-container>
+    </confetti-container>
 
-      ${this.delete ? html`
-        <confirmation-message class="confirmation-message" @confirmationYes="${this.confirmation}" 
+      ${this.delete ? html` <confirmation-message class="confirmation-message" @confirmationYes="${this.confirmation}" 
             @confirmationNo="${this.confirmation}"></confirmation-message> ` : ''}
 
       `;
