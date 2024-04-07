@@ -15,6 +15,7 @@ export class HaxcmsPartyUi extends DDD {
       this.userArray = [];
       this.selectedUser = "";
       this.inputEmtpy = false;
+      this.handleKeyDown = this.keyDown.bind(this);
     }
 
   static get styles() {
@@ -33,7 +34,6 @@ export class HaxcmsPartyUi extends DDD {
       }
       .user-list{
         display: block;
-
       }
       .add-button{
         font-family: "Press Start 2P", system-ui;
@@ -69,23 +69,21 @@ export class HaxcmsPartyUi extends DDD {
     }
   
   addUser(){
+    const user = this.shadowRoot.querySelector("#input-user").value;
+    const isValid = /^[a-z0-9]+$/.test(user); 
+    if(!isValid){
+      alert("lowercase letters and numbers only pwease?")
+    }else if(user === ""){
+      alert("NO! Maybe you forgot, ADD A USER!")
+    }else if(this.userArray.includes(user)){
+      alert("NO! Maybe you forgot, you already added" user)
+    }else if(user.length() > 100){
+      alert("This username is too long.")
+      return
+    }
     this.userArray.push(user);
     this.requestUpdate();
     console.log(this.userArray);
-  } 
-  validationChecks(){
-    const user = this.shadowRoot.querySelector("#input-user").value;
-    if(user === ""){
-      alert("bad")
-    }
-    if(this.userArray.includes(user)){
-      alert("NO! Maybe you forgot, you already added" this.user)
-      return
-    }
-    if(user.length() > 100){
-      alert("This username is too long.")
-    }
-
   } 
   deleteUser(e){
     const id = e.target.id;
@@ -106,10 +104,16 @@ export class HaxcmsPartyUi extends DDD {
     }
     this.delete = false;
   }
+  keyDown(event) {
+    if (event.key === 'Enter' && event.target.id === 'input-user') {
+      this.addUser();
+    }
+  }
   submitParty(e){
     this.submitPartyButton = true;
     this.makeItRain();
-    console.log(this.userArray);
+    const finalParty = this.user.toString();
+    localStorage.setItem("party", finalParty);
   }
 
 makeItRain() {
@@ -143,7 +147,6 @@ makeItRain() {
 
       ${this.delete ? html` <confirmation-message class="confirmation-message" @confirmationYes="${this.confirmation}" 
             @confirmationNo="${this.confirmation}"></confirmation-message> ` : ''}
-
       `;
     }
 
