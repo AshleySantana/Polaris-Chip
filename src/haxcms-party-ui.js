@@ -36,14 +36,14 @@ export class HaxcmsPartyUi extends DDD {
         display: block;
       }
       .add-button{
-        font-family: "Press Start 2P", system-ui;
+        
         font-size: 30px;
         padding: 15px;
         background-color: lime;
         color: grey;
       }
       .submit-button{
-        font-family: "Press Start 2P", system-ui;
+        
         font-size: 30px;
         padding: 15px;
         background-color: lime;
@@ -73,11 +73,14 @@ export class HaxcmsPartyUi extends DDD {
     const isValid = /^[a-z0-9]+$/.test(user); 
     if(!isValid){
       alert("lowercase letters and numbers only pwease?")
-    }else if(user === ""){
+    } 
+    if(user === null){
       alert("NO! Maybe you forgot, ADD A USER!")
-    }else if(this.userArray.includes(user)){
-      alert("NO! Maybe you forgot, you already added" user)
-    }else if(user.length() > 100){
+    }
+    if(this.userArray.includes(user)){
+      alert("NO! Maybe you forgot, you already added this user.")
+    }
+    if(user.length() > 100){
       alert("This username is too long.")
       return
     }
