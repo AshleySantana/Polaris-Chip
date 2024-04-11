@@ -80,10 +80,6 @@ export class HaxcmsPartyUi extends DDD {
     if(this.userArray.includes(user)){
       alert("NO! Maybe you forgot, you already added this user.")
     }
-    if(user.length() > 100){
-      alert("This username is too long.")
-      return
-    }
     this.userArray.push(user);
     this.requestUpdate();
     console.log(this.userArray);
@@ -160,7 +156,6 @@ makeItRain() {
       selectedUser: {type: String, reflect: true},
       inputEmtpy: {type: Boolean},
       submitPartyButton: {type: Boolean}, 
-
     };
   }
 }
