@@ -144,7 +144,7 @@ makeItRain() {
       <button class="submit-button" @click = "${this.submitParty}">submit</button>
     </confetti-container>
 
-      ${this.delete ? html` <confirmation-message class="confirmation-message" @confirmationYes="${this.confirmation}" 
+      ${this.delete ? html`<confirmation-message class="confirmation-message" @confirmationYes="${this.confirmation}" 
             @confirmationNo="${this.confirmation}"></confirmation-message> ` : ''}
       `;
     }
